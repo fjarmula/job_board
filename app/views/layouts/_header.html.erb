@@ -1,0 +1,10 @@
+<% if authenticated? %>
+  <!-- Logged in state -->
+  <div class="flex items-center space-x-4">
+    <%= link_to "Sign out", logout_path, method: :delete, data: { turbo_method: :delete } %>
+  </div>
+<% else %>
+  <!-- Logged out state -->
+  <%= link_to "Sign in", new_session_path %>
+  <%= link_to "Sign up", signup_path %>
+<% end %>

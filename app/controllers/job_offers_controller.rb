@@ -1,4 +1,5 @@
 class JobOffersController < ApplicationController
+  allow_unauthenticated_access only: [ :index, :show ]
   def index
     @job_offers = JobOffer.order(created_at: :asc)
   end

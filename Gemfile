@@ -52,6 +52,9 @@ group :development, :test do
 
   # Use RSpec for tests [https://rspec.info/]
   gem "rspec-rails"
+  gem "rails-controller-testing"
+  # Use Factory Bot for test data creation
+  gem "factory_bot_rails"
 end
 
 group :development do

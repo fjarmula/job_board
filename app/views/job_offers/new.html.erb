@@ -1,0 +1,77 @@
+<%= form_with(model: @job_offer, local: true) do |f| %>
+  <% if @job_offer.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@job_offer.errors.count, "error") %> prohibited this job offer from being saved:</h2>
+      <ul>
+        <% @job_offer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :company_name, "Company Name" %>
+    <%= f.text_field :company_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position, "Job Title" %>
+    <%= f.text_field :position %>
+  </div>
+
+  <div class="field">
+    <%= f.label :location, "Location" %>
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label :work_mode, "Work Mode" %>
+    <%= f.select :work_mode, JobOffer.work_modes.keys.map { |m| [m.humanize, m] } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :work_dimension, "Work Dimension" %>
+    <%= f.select :work_dimension, JobOffer.work_dimensions.keys.map { |d| [d.humanize, d] } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :employment_type, "Employment Type" %>
+    <%= f.select :employment_type, JobOffer.employment_types.keys.map { |e| [e.humanize, e] } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :experience_level, "Experience Level" %>
+    <%= f.select :experience_level, JobOffer.experience_levels.keys.map { |e| [e.humanize, e] } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :salary_min, "Salary Minimum" %>
+    <%= f.number_field :salary_min, step: 100 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :salary_max, "Salary Maximum" %>
+    <%= f.number_field :salary_max, step: 100 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, "Job Description" %>
+    <%= f.text_area :description, rows: 20, placeholder:
+      "Include:
+    • General description
+    • Key responsibilities
+    • Requirements
+    • What we offer
+    • Team information" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tech_stack, "Tech Stack / Tools" %>
+    <%= f.text_area :tech_stack %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

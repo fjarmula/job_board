@@ -5,6 +5,17 @@ RSpec.describe "job_offers/show", type: :view do
 
   before do
     assign(:job_offer, job_offer)
+
+    class << view
+      def authenticated?
+        false
+      end
+
+      def current_user
+        nil
+      end
+    end
+
     render
   end
 

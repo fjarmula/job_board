@@ -55,6 +55,9 @@ group :development, :test do
   gem "rails-controller-testing"
   # Use Factory Bot for test data creation
   gem "factory_bot_rails"
+
+  # Preview emails in the browser
+  gem "letter_opener"
 end
 
 group :development do

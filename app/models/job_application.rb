@@ -8,6 +8,6 @@ class JobApplication < ApplicationRecord
 
   private
     def send_notification_email
-      JobApplicationMailer.job_application_confirmation(self).deliver_later  # Remove .with() and pass self directly
+      JobApplicationMailer.job_application_confirmation(self).deliver_later
     end
 end

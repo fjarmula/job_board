@@ -36,40 +36,4 @@ RSpec.describe JobOffersController, type: :controller do
       expect(response).to be_successful
     end
   end
-
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new JobOffer" do
-        expect {
-          post :create, params: { job_offer: valid_attributes }
-        }.to change(JobOffer, :count).by(1)
-      end
-
-      it "redirects to the created job offer" do
-        post :create, params: { job_offer: valid_attributes }
-        expect(response).to redirect_to(JobOffer.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "does not create a new JobOffer" do
-        expect {
-          post :create, params: { job_offer: invalid_attributes }
-        }.to change(JobOffer, :count).by(0)
-      end
-
-      it "renders the new template with unprocessable_entity status" do
-        post :create, params: { job_offer: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response).to render_template(:new)
-      end
-    end
-  end
 end

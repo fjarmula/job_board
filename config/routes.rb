@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "home/index"
   # Authentication
   resource :session, only: [ :new, :create, :destroy ]
   resources :users, only: [ :new, :create ]
@@ -15,5 +16,5 @@ Rails.application.routes.draw do
   resources :job_offers, only: [ :index, :show, :new, :create ]
 
   # Root
-  root "rails/welcome#index"
+  root "home#index"
 end

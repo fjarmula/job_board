@@ -1,0 +1,11 @@
+<h1>Welcome to Job Board</h1>
+
+<% if authenticated? %>
+  <p>Hello, <%= Current.user.username %>!</p>
+  <%= link_to "View job offers", job_offers_path %><br>
+  <%= link_to "Logout", logout_path %>
+<% else %>
+  <p>Please sign up or sign in to continue.</p>
+  <%= link_to "Sign up", signup_path %><br>
+  <%= link_to "Sign in", login_path %>
+<% end %>

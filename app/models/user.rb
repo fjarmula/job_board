@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
+  has_many :job_applications, dependent: :destroy
+  has_many :applied_jobs, through: :job_applications, source: :job_offer
+
   validates :email_address,
             presence: true,
             uniqueness: true,

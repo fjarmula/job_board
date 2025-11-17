@@ -1,1 +1,15 @@
 <%= render partial: "job_offer", locals: { job_offer: @job_offer, show_full_details: true } %>
+
+<h2><%= @job_offer.position %> at <%= @job_offer.company_name %></h2>
+
+<% if authenticated? %>
+  <% if  !Current.user.applied_jobs.include?(@job_offer) %>
+    <%= form_with url: job_offer_job_applications_path(@job_offer), method: :post do |f| %>
+        <%= f.submit "Apply for this job" %>
+    <% end %>
+  <% else %>
+    <p>You have already applied to this job.</p>
+  <% end %>
+<% else %>
+  <p><%= link_to "Sign in", login_path %> to apply</p>
+<% end %>

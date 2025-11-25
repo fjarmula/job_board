@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :recruiters
   get "home/index"
   resource :session, only: [ :new, :create, :destroy ]
   resources :users, only: [ :new, :create ]

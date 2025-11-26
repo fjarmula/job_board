@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :recruiters
+  devise_for :recruiter, controllers: {
+    registrations: "recruiters/registrations"
+  }
   get "home/index"
   resource :session, only: [ :new, :create, :destroy ]
   resources :users, only: [ :new, :create ]

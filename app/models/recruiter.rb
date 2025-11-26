@@ -4,10 +4,10 @@ class Recruiter < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # Validations
+  belongs_to :company
+  has_many :job_offers, dependent: :destroy
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :company_name, presence: true
-
-  has_many :job_offers, dependent: :destroy
 end

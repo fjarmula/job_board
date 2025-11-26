@@ -4,9 +4,9 @@ class JobOffer < ApplicationRecord
   validate :salary_range_valid
 
   belongs_to :recruiter
-
   has_many :job_applications, dependent: :destroy
   has_many :applicants, through: :job_applications, source: :user
+  delegate :company, to: :recruiter
 
   enum :work_mode, { onsite: 0, remote: 1, hybrid: 2 }
   enum :work_dimension, { full_time: 0, part_time: 1, internship: 2 }

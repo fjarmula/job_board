@@ -17,12 +17,14 @@ class JobOffersController < ApplicationController
   end
 
   def new
+    @company = current_recruiter.company
     @job_offer = JobOffer.new
   end
 
   def create
     @job_offer = JobOffer.new(job_offer_params)
     @job_offer.recruiter = current_recruiter
+
     if @job_offer.save
       redirect_to @job_offer, notice: "Job offer was successfully created."
     else

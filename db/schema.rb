@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_26_180737) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_26_185124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -31,7 +31,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_26_180737) do
   end
 
   create_table "job_offers", force: :cascade do |t|
-    t.string "company_name"
     t.datetime "created_at", null: false
     t.text "description"
     t.integer "employment_type"
@@ -50,7 +49,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_26_180737) do
 
   create_table "recruiters", force: :cascade do |t|
     t.bigint "company_id", null: false
-    t.string "company_name", default: "", null: false
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

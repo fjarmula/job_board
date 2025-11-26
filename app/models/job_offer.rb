@@ -1,5 +1,5 @@
 class JobOffer < ApplicationRecord
-  validates :company_name, :position, :location, :work_mode, :work_dimension, :experience_level, presence: true
+  validates :position, :location, :work_mode, :work_dimension, :experience_level, presence: true
   validates :salary_min, :salary_max, numericality: { allow_nil: true }
   validate :salary_range_valid
 

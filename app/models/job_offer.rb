@@ -3,6 +3,8 @@ class JobOffer < ApplicationRecord
   validates :salary_min, :salary_max, numericality: { allow_nil: true }
   validate :salary_range_valid
 
+  belongs_to :recruiter
+
   has_many :job_applications, dependent: :destroy
   has_many :applicants, through: :job_applications, source: :user
 

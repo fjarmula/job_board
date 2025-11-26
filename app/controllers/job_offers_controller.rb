@@ -5,7 +5,11 @@ class JobOffersController < ApplicationController
   before_action :authenticate_recruiter!, only: [ :new, :create ]
   before_action :set_job_offer, only: [ :show ]
   def index
-    @job_offers = JobOffer.order(created_at: :asc)
+    if current_recruiter
+      @job_offers = JobOffer.where(recruiter: current_recruiter).order(created_at: :asc)
+    else
+      @job_offers = JobOffer.all.order(created_at: :asc)
+    end
   end
 
   def show

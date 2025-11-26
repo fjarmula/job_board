@@ -1,21 +1,26 @@
 <h1>Welcome to Job Board</h1>
 
-<% if authenticated? || recruiter_signed_in? %>
-  <% if authenticated? %>
-    <p>Hello, <%= Current.user.username %>!</p>
-    <%= link_to "View job offers", job_offers_path %><br>
-    <%= button_to "Logout", logout_path, method: :delete %>
-  <% elsif recruiter_signed_in? %>
-    <p>Hello, <%= current_recruiter.first_name %>! (Recruiter from <%= current_recruiter.company_name %>)</p>
-    <%= button_to "Logout", destroy_recruiter_session_path, method: :delete %>
-  <% end %>
+<% if authenticated? %>
+  <!-- User is logged in -->
+  <p>Hello, <%= Current.user.username %>!</p>
+  <%= link_to "View job offers", job_offers_path %><br>
+  <%= button_to "Logout", logout_path, method: :delete %>
+
+<% elsif recruiter_signed_in? %>
+  <!-- Recruiter is logged in -->
+  <p>Hello, <%= current_recruiter.first_name %>! (Recruiter from <%= current_recruiter.company_name %>)</p>
+  <%= link_to "View job offers", job_offers_path %><br>
+  <%= link_to "Create New Job Offer", new_job_offer_path %><br>
+  <%= button_to "Logout", destroy_recruiter_session_path, method: :delete %>
+
 <% else %>
-  <h1>For standard User</h1>
+  <!-- No one is logged in -->
+  <h2>For Job Seekers (Users)</h2>
   <p>Please sign up or sign in to continue.</p>
   <%= link_to "Sign up", signup_path %><br>
   <%= link_to "Sign in", login_path %>
 
-  <h1>For Recruiter</h1>
+  <h2>For Recruiters</h2>
   <p>Please sign up or sign in to continue.</p>
   <%= link_to "Sign up", new_recruiter_registration_path %><br>
   <%= link_to "Sign in", new_recruiter_session_path %>

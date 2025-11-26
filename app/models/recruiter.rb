@@ -8,4 +8,6 @@ class Recruiter < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :company_name, presence: true
+
+  has_many :job_offers, dependent: :destroy
 end

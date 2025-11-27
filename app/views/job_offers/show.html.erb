@@ -3,8 +3,11 @@
 
   <!-- Company and Recruiter Info -->
   <div class="company-recruiter-info">
-    <p><strong>Company:</strong> <%= @job_offer.recruiter.company_name %></p>
-    <p><strong>Posted by:</strong> <%= @job_offer.recruiter.first_name %> <%= @job_offer.recruiter.last_name %></p>
+    <p><strong>Company:</strong> <%= link_to @job_offer.recruiter.company.name, company_path(@job_offer.recruiter.company) %></p>
+    <p><strong>Posted by:</strong>
+      <%= link_to "#{@job_offer.recruiter.first_name} #{@job_offer.recruiter.last_name}",
+                  recruiter_path(@job_offer.recruiter) %>
+    </p>
   </div>
 
   <p><strong>Position:</strong> <%= @job_offer.position %></p>

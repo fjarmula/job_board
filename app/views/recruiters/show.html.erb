@@ -1,0 +1,52 @@
+<div class="recruiter-profile">
+  <h1><%= @recruiter.first_name %> <%= @recruiter.last_name %></h1>
+
+  <div class="recruiter-info">
+    <% if @recruiter.super_recruiter? %>
+      <div class="super-recruiter-badge">Super Recruiter</div>
+    <% end %>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Company:</strong>
+        <%= link_to @recruiter.company.name, company_path(@recruiter.company) %>
+      </div>
+
+      <div class="info-item">
+        <strong>Email:</strong> <%= @recruiter.email %>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Job Offers Posted</h3>
+    <% if @recruiter.job_offers.any? %>
+      <div class="job-offers">
+        <% @recruiter.job_offers.each do |job_offer| %>
+          <div class="job-offer-card">
+            <h4><%= link_to job_offer.position, job_offer %></h4>
+            <p><strong>Company:</strong> <%= link_to job_offer.company.name, company_path(job_offer.company) %></p>
+            <p><strong>Location:</strong> <%= job_offer.location %></p>
+            <p><strong>Posted:</strong> <%= time_ago_in_words(job_offer.created_at) %> ago</p>
+
+            <% if current_recruiter == @recruiter %>
+              <div class="recruiter-actions">
+                <%= link_to "Edit", edit_job_offer_path(job_offer) %> |
+                <%= link_to "Delete", job_offer, method: :delete, data: { confirm: "Are you sure?" } %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>No job offers posted yet.</p>
+    <% end %>
+  </div>
+
+  <% if current_recruiter == @recruiter %>
+    <div class="personal-actions">
+      <%= link_to "Create New Job Offer", new_job_offer_path, class: "btn btn-primary" %>
+      <%= link_to "Edit My Profile", edit_recruiter_registration_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>

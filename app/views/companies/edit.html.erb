@@ -1,0 +1,56 @@
+<div class="company-edit">
+  <h1>Edit Company Profile</h1>
+
+  <%= form_with(model: @company, local: true) do |f| %>
+    <% if @company.errors.any? %>
+      <div class="errors">
+        <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+        <ul>
+          <% @company.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name, "Company Name" %>
+      <%= f.text_field :name, required: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description, "Company Description" %>
+      <%= f.text_area :description, rows: 6, placeholder: "Tell candidates about your company culture, mission, and values..." %>
+    </div>
+
+    <div class="field">
+      <%= f.label :website, "Website" %>
+      <%= f.text_field :website, placeholder: "https://example.com" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :industry, "Industry" %>
+      <%= f.text_field :industry, placeholder: "e.g., Technology, Healthcare, Finance" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :size, "Company Size" %>
+      <%= f.select :size, options_for_select(Company::SIZES, @company.size), include_blank: "Select company size..." %>
+    </div>
+
+    <div class="field">
+      <%= f.label :founded_in, "Founded In" %>
+      <%= f.number_field :founded_in, min: 1800, max: Date.current.year, placeholder: "e.g., 2010" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :headquarters, "Headquarters" %>
+      <%= f.text_field :headquarters, placeholder: "e.g., San Francisco, CA" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Update Company Profile" %>
+      <%= link_to "Cancel", company_path(@company) %>
+    </div>
+  <% end %>
+</div>

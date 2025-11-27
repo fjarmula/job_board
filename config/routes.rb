@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
   get "signup", to: "users#new"
 
+  get "companies/check_exists", to: "companies#check_exists"
+
+  resources :companies, only: [ :show, :edit, :update ]
+  resources :recruiters, only: [ :show ]
+
   resources :passwords, param: :token
 
   resources :job_offers, only: [ :index, :show, :new, :create ] do

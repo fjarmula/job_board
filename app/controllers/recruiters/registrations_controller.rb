@@ -9,10 +9,26 @@ class Recruiters::RegistrationsController < Devise::RegistrationsController
     if company_name.present?
       company = Company.find_by(name: company_name)
       company_was_new = company.nil?
-      company ||= Company.create!(name: company_name)
 
-      resource.company = company
-      resource.super_recruiter = company_was_new
+      if company_was_new
+        company = Company.new(
+          name: company_name,
+          description: params[:company_description],
+          website: params[:company_website],
+          industry: params[:company_industry],
+          size: params[:company_size],
+          founded_in: params[:company_founded_in],
+          headquarters: params[:company_headquarters]
+        )
+
+        unless company.save
+          company.errors.full_messages.each do |message|
+            resource.errors.add(:company, message)
+          end
+        end
+      end
+      resource.company = company if company&.persisted?
+      resource.super_recruiter = company_was_new && company&.persisted?
     else
       resource.errors.add(:company, "can't be blank")
     end
@@ -36,11 +52,6 @@ class Recruiters::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       respond_with resource
     end
-  rescue ActiveRecord::RecordInvalid
-    clean_up_passwords resource
-    set_minimum_password_length
-    resource.errors.add(:company, "could not be created") if company_name.present?
-    respond_with resource
   end
 
   private

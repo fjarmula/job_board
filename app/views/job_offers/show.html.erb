@@ -3,7 +3,7 @@
 
   <!-- Company and Recruiter Info -->
   <div class="company-recruiter-info">
-    <p><strong>Company:</strong> <%= @job_offer.recruiter.company.name %></p>
+    <p><strong>Company:</strong> <%= @job_offer.recruiter.company_name %></p>
     <p><strong>Posted by:</strong> <%= @job_offer.recruiter.first_name %> <%= @job_offer.recruiter.last_name %></p>
   </div>
 
@@ -31,6 +31,18 @@
       <h3>Tech Stack</h3>
       <%= simple_format(@job_offer.tech_stack) %>
     </div>
+  <% end %>
+
+  <% if authenticated? %>
+    <% if  !Current.user.applied_jobs.include?(@job_offer) %>
+      <%= form_with url: job_offer_job_applications_path(@job_offer), method: :post do |f| %>
+        <%= f.submit "Apply for this job" %>
+      <% end %>
+    <% else %>
+      <p>You have already applied to this job.</p>
+    <% end %>
+  <% else %>
+    <p><%= link_to "Sign in", login_path %> to apply</p>
   <% end %>
 
   <p><small>Posted: <%= time_ago_in_words(@job_offer.created_at) %> ago</small></p>

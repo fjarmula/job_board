@@ -5,15 +5,25 @@ class Recruiters::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     company_name = params[:recruiter][:company]
+
     if company_name.present?
-      resource.company = Company.find_or_create_by(name: company_name)
+      company = Company.find_by(name: company_name)
+      company_was_new = company.nil?
+      company ||= Company.create!(name: company_name)
+
+      resource.company = company
+      resource.super_recruiter = company_was_new
     else
       resource.errors.add(:company, "can't be blank")
     end
 
     if resource.errors.empty? && resource.save
       if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
+        if resource.super_recruiter?
+          set_flash_message! :notice, "Welcome! You have signed up successfully as the super recruiter for #{company_name}."
+        else
+          set_flash_message! :notice, :signed_up
+        end
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
       else
@@ -26,6 +36,11 @@ class Recruiters::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       respond_with resource
     end
+  rescue ActiveRecord::RecordInvalid
+    clean_up_passwords resource
+    set_minimum_password_length
+    resource.errors.add(:company, "could not be created") if company_name.present?
+    respond_with resource
   end
 
   private

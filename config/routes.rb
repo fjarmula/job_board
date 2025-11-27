@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :recruiter, controllers: {
+    registrations: "recruiters/registrations"
+  }
   get "home/index"
   resource :session, only: [ :new, :create, :destroy ]
   resources :users, only: [ :new, :create ]
@@ -6,6 +9,11 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new"
   delete "logout", to: "sessions#destroy"
   get "signup", to: "users#new"
+
+  get "companies/check_exists", to: "companies#check_exists"
+
+  resources :companies, only: [ :show, :edit, :update ]
+  resources :recruiters, only: [ :show ]
 
   resources :passwords, param: :token
 

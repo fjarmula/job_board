@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_17_114655) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_27_161929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.integer "founded_in"
+    t.string "headquarters"
+    t.string "industry"
+    t.string "name", null: false
+    t.string "size"
+    t.datetime "updated_at", null: false
+    t.string "website"
+    t.index ["name"], name: "index_companies_on_name", unique: true
+  end
 
   create_table "job_applications", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -24,19 +37,38 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_114655) do
   end
 
   create_table "job_offers", force: :cascade do |t|
-    t.string "company_name"
     t.datetime "created_at", null: false
     t.text "description"
     t.integer "employment_type"
     t.integer "experience_level"
     t.string "location"
     t.string "position"
+    t.bigint "recruiter_id", null: false
     t.decimal "salary_max"
     t.decimal "salary_min"
     t.text "tech_stack"
     t.datetime "updated_at", null: false
     t.integer "work_dimension"
     t.integer "work_mode"
+    t.index ["recruiter_id"], name: "index_job_offers_on_recruiter_id"
+  end
+
+  create_table "recruiters", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "phone_number", default: "", null: false
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.boolean "super_recruiter", default: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_recruiters_on_company_id"
+    t.index ["email"], name: "index_recruiters_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_recruiters_on_reset_password_token", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -58,5 +90,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_114655) do
 
   add_foreign_key "job_applications", "job_offers"
   add_foreign_key "job_applications", "users"
+  add_foreign_key "job_offers", "recruiters"
+  add_foreign_key "recruiters", "companies"
   add_foreign_key "sessions", "users"
 end

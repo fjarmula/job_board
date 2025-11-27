@@ -1,15 +1,49 @@
-<%= render partial: "job_offer", locals: { job_offer: @job_offer, show_full_details: true } %>
+<div class="job-offer">
+  <h2><%= @job_offer.position %></h2>
 
-<h2><%= @job_offer.position %> at <%= @job_offer.company_name %></h2>
+  <!-- Company and Recruiter Info -->
+  <div class="company-recruiter-info">
+    <p><strong>Company:</strong> <%= @job_offer.recruiter.company_name %></p>
+    <p><strong>Posted by:</strong> <%= @job_offer.recruiter.first_name %> <%= @job_offer.recruiter.last_name %></p>
+  </div>
 
-<% if authenticated? %>
-  <% if  !Current.user.applied_jobs.include?(@job_offer) %>
-    <%= form_with url: job_offer_job_applications_path(@job_offer), method: :post do |f| %>
+  <p><strong>Position:</strong> <%= @job_offer.position %></p>
+  <p><strong>Location:</strong> <%= @job_offer.location %></p>
+  <p><strong>Work Mode:</strong> <%= @job_offer.work_mode.humanize %></p>
+  <p><strong>Work Dimension:</strong> <%= @job_offer.work_dimension.humanize %></p>
+  <p><strong>Employment Type:</strong> <%= @job_offer.employment_type.humanize %></p>
+  <p><strong>Experience Level:</strong> <%= @job_offer.experience_level.humanize %></p>
+
+  <% if @job_offer.salary_min || @job_offer.salary_max %>
+    <p><strong>Salary:</strong>
+      <%= number_to_currency(@job_offer.salary_min) if @job_offer.salary_min %>
+      <%= " - #{number_to_currency(@job_offer.salary_max)}" if @job_offer.salary_max %>
+    </p>
+  <% end %>
+
+  <div class="description">
+    <h3>Job Description</h3>
+    <%= simple_format(@job_offer.description) %>
+  </div>
+
+  <% if @job_offer.tech_stack.present? %>
+    <div class="tech-stack">
+      <h3>Tech Stack</h3>
+      <%= simple_format(@job_offer.tech_stack) %>
+    </div>
+  <% end %>
+
+  <% if authenticated? %>
+    <% if  !Current.user.applied_jobs.include?(@job_offer) %>
+      <%= form_with url: job_offer_job_applications_path(@job_offer), method: :post do |f| %>
         <%= f.submit "Apply for this job" %>
+      <% end %>
+    <% else %>
+      <p>You have already applied to this job.</p>
     <% end %>
   <% else %>
-    <p>You have already applied to this job.</p>
+    <p><%= link_to "Sign in", login_path %> to apply</p>
   <% end %>
-<% else %>
-  <p><%= link_to "Sign in", login_path %> to apply</p>
-<% end %>
+
+  <p><small>Posted: <%= time_ago_in_words(@job_offer.created_at) %> ago</small></p>
+</div>

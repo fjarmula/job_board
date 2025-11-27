@@ -11,6 +11,9 @@ class Recruiter < ApplicationRecord
   validates :last_name, presence: true
   validates :company_name, presence: true
 
+  def super_recruiter?
+    super_recruiter
+  end
   def company_name
     company&.name
   end

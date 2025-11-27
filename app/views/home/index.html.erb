@@ -8,7 +8,12 @@
 
 <% elsif recruiter_signed_in? %>
   <!-- Recruiter is logged in -->
-  <p>Hello, <%= current_recruiter.first_name %>! (Recruiter from <%= current_recruiter.company.name %>)</p>
+  <p>Hello, <%= current_recruiter.first_name %>!
+    <% if current_recruiter.super_recruiter? %>
+      <strong>(Super Recruiter)</strong>
+    <% end %>
+  </p>
+  <p>Company: <%= current_recruiter.company.name %></p>
   <%= link_to "View job offers", job_offers_path %><br>
   <%= link_to "Create New Job Offer", new_job_offer_path %><br>
   <%= button_to "Logout", destroy_recruiter_session_path, method: :delete %>

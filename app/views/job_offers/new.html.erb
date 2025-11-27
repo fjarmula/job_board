@@ -10,9 +10,15 @@
     </div>
   <% end %>
 
+  <!-- Recruiter and Company Info -->
+  <div class="recruiter-info">
+    <p><strong>Posted by:</strong> <%= current_recruiter.first_name %> <%= current_recruiter.last_name %></p>
+    <p><strong>Company:</strong> <%= current_recruiter.company.name %></p>
+  </div>
+
+  <!-- Hidden field to show which company this job offer belongs to -->
   <div class="field">
-    <%= f.label :company_name, "Company Name" %>
-    <%= f.text_field :company_name %>
+    <%= f.hidden_field :company_id, value: current_recruiter.company.id %>
   </div>
 
   <div class="field">

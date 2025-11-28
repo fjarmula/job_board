@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for(@user)
-      redirect_back(fallback_location: root_path)
+      redirect_to root_path, notice: "Welcome! You have signed up successfully."
     else
       render :new, status: :unprocessable_entity
     end

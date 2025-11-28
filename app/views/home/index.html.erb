@@ -1,32 +1,160 @@
 <h1>Welcome to Job Board</h1>
 
-<% if authenticated? %>
-  <!-- User is logged in -->
-  <p>Hello, <%= Current.user.username %>!</p>
-  <%= link_to "View job offers", job_offers_path %><br>
-  <%= button_to "Logout", logout_path, method: :delete %>
+<div class="search-form">
+  <h2>Find Your Dream Job</h2>
 
-<% elsif recruiter_signed_in? %>
-  <!-- Recruiter is logged in -->
-  <p>Hello, <%= current_recruiter.first_name %>!
-    <% if current_recruiter.super_recruiter? %>
-      <strong>(Super Recruiter)</strong>
-    <% end %>
-  </p>
-  <p>Company: <%= current_recruiter.company.name %></p>
-  <%= link_to "View job offers", job_offers_path %><br>
-  <%= link_to "Create New Job Offer", new_job_offer_path %><br>
-  <%= button_to "Logout", destroy_recruiter_session_path, method: :delete %>
+  <%= form_with url: root_path, method: :get, local: true do |_| %>
+    <div>
+      <div>
+        <%= label_tag "search[company]", "Company Name" %>
+        <%= text_field_tag "search[company]", params.dig(:search, :company),
+                           placeholder: "e.g., Tech Corp" %>
+      </div>
 
+      <div>
+        <%= label_tag "search[position]", "Job Position" %>
+        <%= text_field_tag "search[position]", params.dig(:search, :position),
+                           placeholder: "e.g., Developer, Manager" %>
+      </div>
+
+      <div>
+        <%= label_tag "search[experience_level]", "Experience Level" %>
+        <%= select_tag "search[experience_level]",
+                       options_for_select([
+                                            ["Any Level", ""],
+                                            ["Junior"],
+                                            ["Mid"],
+                                            ["Senior"],
+                                            ["Lead"]
+                                          ], params.dig(:search, :experience_level)) %>
+      </div>
+
+      <div>
+        <%= label_tag "search[work_mode]", "Work Mode" %>
+        <%= select_tag "search[work_mode]",
+                       options_for_select([
+                                            ["Any Mode", ""],
+                                            ["Remote"],
+                                            ["Hybrid"],
+                                            ["Onsite"]
+                                          ], params.dig(:search, :work_mode)) %>
+      </div>
+
+      <div>
+        <%= label_tag "search[location]", "Location" %>
+        <%= text_field_tag "search[location]", params.dig(:search, :location),
+                           placeholder: "e.g., Krakow" %>
+      </div>
+    </div>
+
+    <div>
+      <%= submit_tag "Search Jobs", name: nil %>
+      <%= link_to "Clear Filters", root_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>
+
+<% if params[:search].present? && search_params_present?(params[:search]) %>
+  <div class="search-results-info">
+    <h3>
+      <%= pluralize(@job_offers.count, 'job') %> found
+      <% if active_filters.any? %>
+        matching: <%= active_filters.join(" and ") %>
+      <% end %>
+    </h3>
+  </div>
+<% end %>
+
+<div class="job-offers-container">
+  <% if @job_offers.any? %>
+    <div id="job_offers">
+      <% @job_offers.each do |job_offer| %>
+        <div class="job-offer-card">
+          <h3><%= link_to job_offer.position, job_offer %></h3>
+
+          <div>
+            <div>
+              <strong>Company:</strong>
+              <%= link_to job_offer.company.name, company_path(job_offer.company) %>
+            </div>
+            <div>
+              <strong>Location:</strong> <%= job_offer.location %>
+            </div>
+            <div>
+              <strong>Experience:</strong> <%= job_offer.experience_level.humanize %>
+            </div>
+            <div>
+              <strong>Work Mode:</strong> <%= job_offer.work_mode.humanize %>
+            </div>
+          </div>
+
+          <% if job_offer.salary_min || job_offer.salary_max %>
+            <div>
+              <strong>Salary:</strong>
+              <%= number_to_currency(job_offer.salary_min) if job_offer.salary_min %>
+              <%= " - #{number_to_currency(job_offer.salary_max)}" if job_offer.salary_max %>
+            </div>
+          <% end %>
+
+          <p>
+            <%= truncate(job_offer.description, length: 200) %>
+          </p>
+
+          <div>
+            Posted <%= time_ago_in_words(job_offer.created_at) %> ago by
+            <%= link_to "#{job_offer.recruiter.first_name} #{job_offer.recruiter.last_name}",
+                        recruiter_path(job_offer.recruiter) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="no-results">
+      <h3>No job offers found</h3>
+      <p>Try adjusting your search criteria or <%= link_to "clear filters", root_path %> to see all jobs.</p>
+    </div>
+  <% end %>
+</div>
+
+<% if !authenticated? && !recruiter_signed_in? %>
+  <div>
+    <div>
+      <div>
+        <h2>Job Seekers</h2>
+        <p>Looking for jobs?</p>
+        <%= link_to "Sign up", signup_path%><br>
+        <%= link_to "Sign in", login_path %>
+      </div>
+
+      <div>
+        <h2>Recruiters</h2>
+        <p>Hiring talent?</p>
+        <%= link_to "Sign up", new_recruiter_registration_path%><br>
+        <%= link_to "Sign in", new_recruiter_session_path %>
+      </div>
+    </div>
+  </div>
 <% else %>
-  <!-- No one is logged in -->
-  <h2>For Job Seekers (Users)</h2>
-  <p>Please sign up or sign in to continue.</p>
-  <%= link_to "Sign up", signup_path %><br>
-  <%= link_to "Sign in", login_path %>
+  <div>
+    <% if authenticated? %>
+      <h2>Welcome back, <%= Current.user.username %>!</h2>
+      <p>Ready to find your next opportunity?</p>
+      <%= link_to "Browse All Job Offers", job_offers_path %>
+      <%= button_to "Logout", logout_path, method: :delete %>
 
-  <h2>For Recruiters</h2>
-  <p>Please sign up or sign in to continue.</p>
-  <%= link_to "Sign up", new_recruiter_registration_path %><br>
-  <%= link_to "Sign in", new_recruiter_session_path %>
+    <% elsif recruiter_signed_in? %>
+      <h2>Welcome back, <%= current_recruiter.first_name %>!
+        <% if current_recruiter.super_recruiter? %>
+          <span>Super Recruiter</span>
+        <% end %>
+      </h2>
+      <p>Company: <strong><%= current_recruiter.company.name %></strong></p>
+      <div>
+        <%= link_to "Browse Job Offers", job_offers_path%>
+        <%= link_to "Create New Job Offer", new_job_offer_path, class: "btn btn-success" %>
+        <%= link_to "My Company Profile", company_path(current_recruiter.company), class: "btn btn-secondary" %>
+        <%= button_to "Logout", destroy_recruiter_session_path, method: :delete %>
+      </div>
+    <% end %>
+  </div>
 <% end %>

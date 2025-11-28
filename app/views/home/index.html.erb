@@ -22,10 +22,9 @@
         <%= select_tag "search[experience_level]",
                        options_for_select([
                                             ["Any Level", ""],
-                                            ["Junior"],
-                                            ["Mid"],
-                                            ["Senior"],
-                                            ["Lead"]
+                                            %w[Junior junior],
+                                            %w[Mid mid],
+                                            %w[Senior senior]
                                           ], params.dig(:search, :experience_level)) %>
       </div>
 
@@ -34,9 +33,9 @@
         <%= select_tag "search[work_mode]",
                        options_for_select([
                                             ["Any Mode", ""],
-                                            ["Remote"],
-                                            ["Hybrid"],
-                                            ["Onsite"]
+                                            %w[Remote 0],
+                                            %w[Hybrid 1],
+                                            %w[Onsite 2]
                                           ], params.dig(:search, :work_mode)) %>
       </div>
 

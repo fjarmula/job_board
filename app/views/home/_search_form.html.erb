@@ -1,0 +1,47 @@
+<div class="search-form">
+  <h2>Find Your Dream Job</h2>
+
+  <%= form_with url: root_path, method: :get, local: true do |_| %>
+    <div class="search-fields-grid">
+      <%= render 'home/search_field',
+                 name: 'company',
+                 label: 'Company Name',
+                 placeholder: 'e.g., Tech Corp' %>
+
+      <%= render 'home/search_field',
+                 name: 'position',
+                 label: 'Job Position',
+                 placeholder: 'e.g., Developer, Manager' %>
+
+      <%= render 'home/search_select',
+                 name: 'experience_level',
+                 label: 'Experience Level',
+                 options: [
+                   ['Any Level', ''],
+                   %w[Junior junior],
+                   %w[Mid mid_level],
+                   %w[Senior senior]
+                 ] %>
+
+      <%= render 'home/search_select',
+                 name: 'work_mode',
+                 label: 'Work Mode',
+                 options: [
+                   ['Any Mode', ''],
+                   %w[Onsite 0],
+                   %w[Remote 1],
+                   %w[Hybrid 2]
+                 ] %>
+
+      <%= render 'home/search_field',
+                 name: 'location',
+                 label: 'Location',
+                 placeholder: 'e.g., Krakow' %>
+    </div>
+
+    <div class="search-actions">
+      <%= submit_tag "Search Jobs", name: nil %>
+      <%= link_to "Clear Filters", root_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>

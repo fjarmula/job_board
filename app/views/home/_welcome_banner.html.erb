@@ -1,0 +1,7 @@
+<div class="welcome-banner">
+  <% if authenticated? %>
+    <%= render "welcome_banner/user" %>
+  <% elsif recruiter_signed_in? %>
+    <%= render "welcome_banner/recruiter" %>
+  <% end %>
+</div>

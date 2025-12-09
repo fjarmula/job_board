@@ -1,0 +1,47 @@
+<%= form_with(model: job_offer, local: true) do |f| %>
+
+  <%= render 'shared/error_messages', resource: job_offer %>
+
+  <%= render 'job_offers/recruiter_info', company: current_recruiter.company, recruiter: current_recruiter %>
+
+  <div class="field">
+    <%= f.hidden_field :company_id, value: current_recruiter.company.id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position, "Job Title" %>
+    <%= f.text_field :position %>
+  </div>
+
+  <div class="field">
+    <%= f.label :location, "Location" %>
+    <%= f.text_field :location %>
+  </div>
+
+  <%= render 'job_offers/field_group', f: f %>
+
+  <div class="field">
+    <%= f.label :salary_min, "Salary Minimum" %>
+    <%= f.number_field :salary_min, step: 100 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :salary_max, "Salary Maximum" %>
+    <%= f.number_field :salary_max, step: 100 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, "Job Description" %>
+    <%= f.text_area :description, rows: 20, placeholder:
+      "Include: \n• General description\n• Key responsibilities\n• Requirements\n• What we offer\n• Team information" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tech_stack, "Tech Stack / Tools" %>
+    <%= f.text_area :tech_stack %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

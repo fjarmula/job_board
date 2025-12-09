@@ -1,0 +1,34 @@
+<h2><%= job_offer.position %></h2>
+
+<div class="job-full-details">
+  <p>
+    <strong>Company:</strong>
+    <%= link_to job_offer.recruiter.company.name, company_path(job_offer.recruiter.company) %>
+  </p>
+
+  <p>
+    <strong>Posted by:</strong>
+    <%= link_to "#{job_offer.recruiter.first_name} #{job_offer.recruiter.last_name}",
+                recruiter_path(job_offer.recruiter) %>
+  </p>
+
+  <p><strong>Location:</strong> <%= job_offer.location %></p>
+  <p><strong>Work Mode:</strong> <%= job_offer.work_mode.humanize %></p>
+  <p><strong>Work Dimension:</strong> <%= job_offer.work_dimension.humanize %></p>
+  <p><strong>Experience:</strong> <%= job_offer.experience_level.humanize %></p>
+  <p><strong>Employment Type:</strong> <%= job_offer.employment_type.humanize %></p>
+</div>
+
+<%= render 'job_offers/salary_info', job_offer: job_offer %>
+
+<div class="job-description-section">
+  <h3>Job Description</h3>
+  <p><%= job_offer.description %></p>
+</div>
+
+<div class="job-tech-stack">
+  <h3>Tech Stack</h3>
+  <p><%= job_offer.tech_stack %></p>
+</div>
+
+<p><small>Posted: <%= time_ago_in_words(job_offer.created_at) %> ago</small></p>

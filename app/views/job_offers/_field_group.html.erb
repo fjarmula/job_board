@@ -1,0 +1,25 @@
+<div class="form-group-grid">
+  <%= render 'job_offers/form_select_field',
+             f: f,
+             attribute: :work_mode,
+             label: "Work Mode",
+             options: JobOffer.work_modes.keys.map { |m| [m.humanize, m] } %>
+
+  <%= render 'job_offers/form_select_field',
+             f: f,
+             attribute: :work_dimension,
+             label: "Work Dimension",
+             options: JobOffer.work_dimensions.keys.map { |d| [d.humanize, d] } %>
+
+  <%= render 'job_offers/form_select_field',
+             f: f,
+             attribute: :employment_type,
+             label: "Employment Type",
+             options: JobOffer.employment_types.keys.map { |e| [e.humanize, e] } %>
+
+  <%= render 'job_offers/form_select_field',
+             f: f,
+             attribute: :experience_level,
+             label: "Experience Level",
+             options: JobOffer.experience_levels.keys.map { |e| [e.humanize, e] } %>
+</div>

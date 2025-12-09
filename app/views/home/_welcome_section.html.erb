@@ -1,0 +1,5 @@
+<% if !authenticated? && !recruiter_signed_in? %>
+  <%= render "authentication_options" %>
+<% else %>
+  <%= render "welcome_banner" %>
+<% end %>

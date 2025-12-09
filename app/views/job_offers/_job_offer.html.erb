@@ -1,26 +1,7 @@
 <div class="job-offer">
-  <h2><%= job_offer.position %></h2>
-  <p><strong>Company:</strong> <%= job_offer.recruiter.company_name %></p>
-  <p><strong>Position:</strong> <%= job_offer.position %></p>
-  <p><strong>Location:</strong> <%= job_offer.location %></p>
-  <p><strong>Work Mode:</strong> <%= job_offer.work_mode.humanize %></p>
-  <p><strong>Work Dimension:</strong> <%= job_offer.work_dimension.humanize %></p>
-
   <% if defined?(show_full_details) && show_full_details %>
-    <p><strong>Employment Type:</strong> <%= job_offer.employment_type.humanize %></p>
-    <p><strong>Description:</strong> <%= job_offer.description %></p>
-    <p><strong>Tech Stack:</strong> <%= job_offer.tech_stack %></p>
+    <%= render 'job_offers/full_details', job_offer: job_offer %>
   <% else %>
-    <p><strong>Experience:</strong> <%= job_offer.experience_level.humanize %></p>
-    <p><strong>Description:</strong> See full job offer <%= link_to "click here", job_offer %></p>
+    <%= render 'job_offers/summary', job_offer: job_offer %>
   <% end %>
-
-  <% if job_offer.salary_min || job_offer.salary_max %>
-    <p><strong>Salary:</strong>
-      <%= number_to_currency(job_offer.salary_min) if job_offer.salary_min %>
-      <%= " - #{number_to_currency(job_offer.salary_max)}" if job_offer.salary_max %>
-    </p>
-  <% end %>
-
-  <p><small>Posted: <%= time_ago_in_words(job_offer.created_at) %> ago</small></p>
 </div>

@@ -2,87 +2,20 @@
   <h1><%= @company.name %></h1>
 
   <div class="company-details">
-    <% if @company.description.present? %>
-      <div class="section">
-        <h3>About Us</h3>
-        <p><%= simple_format(@company.description) %></p>
-      </div>
-    <% end %>
+    <%= render 'companies/description', company: @company %>
 
     <div class="company-info-grid">
-      <% if @company.industry.present? %>
-        <div class="info-item">
-          <strong>Industry:</strong> <%= @company.industry %>
-        </div>
-      <% end %>
-
-      <% if @company.size.present? %>
-        <div class="info-item">
-          <strong>Company Size:</strong> <%= @company.size %>
-        </div>
-      <% end %>
-
-      <% if @company.founded_in.present? %>
-        <div class="info-item">
-          <strong>Founded:</strong> <%= @company.founded_in %>
-        </div>
-      <% end %>
-
-      <% if @company.headquarters.present? %>
-        <div class="info-item">
-          <strong>Headquarters:</strong> <%= @company.headquarters %>
-        </div>
-      <% end %>
-
-      <% if @company.website.present? %>
-        <div class="info-item">
-          <strong>Website:</strong> <%= link_to @company.website, @company.website, target: "_blank" %>
-        </div>
-      <% end %>
+      <%= render 'companies/info_item', label: 'Industry', value: @company.industry %>
+      <%= render 'companies/info_item', label: 'Company Size', value: @company.size %>
+      <%= render 'companies/info_item', label: 'Founded', value: @company.founded_in %>
+      <%= render 'companies/info_item', label: 'Headquarters', value: @company.headquarters %>
+      <%= render 'companies/website_item', website: @company.website %>
     </div>
   </div>
 
-  <div class="section">
-    <h3>Current Job Offers</h3>
-    <% if @company.job_offers.any? %>
-      <div class="job-offers">
-        <% @company.job_offers.each do |job_offer| %>
-          <div class="job-offer-card">
-            <h4><%= link_to job_offer.position, job_offer %></h4>
-            <p><strong>Location:</strong> <%= job_offer.location %></p>
-            <p><strong>Work Mode:</strong> <%= job_offer.work_mode.humanize %></p>
-            <p><strong>Experience:</strong> <%= job_offer.experience_level.humanize %></p>
-            <% if job_offer.salary_min || job_offer.salary_max %>
-              <p><strong>Salary:</strong>
-                <%= number_to_currency(job_offer.salary_min) if job_offer.salary_min %>
-                <%= " - #{number_to_currency(job_offer.salary_max)}" if job_offer.salary_max %>
-              </p>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p>No current job openings.</p>
-    <% end %>
-  </div>
+  <%= render 'companies/job_offers_section', company: @company %>
 
-  <div class="section">
-    <h3>Recruiters</h3>
-    <div class="recruiters-list">
-      <% @company.recruiters.each do |recruiter| %>
-        <div class="recruiter-item">
-          <%= link_to "#{recruiter.first_name} #{recruiter.last_name}", recruiter_path(recruiter) %>
-          <% if recruiter.super_recruiter? %>
-            <span class="super-recruiter-badge">Super Recruiter</span>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'companies/recruiters_section', company: @company %>
 
-  <% if current_recruiter&.super_recruiter? && current_recruiter.company == @company %>
-    <div class="admin-actions">
-      <%= link_to "Edit Company Profile", edit_company_path(@company), class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  <%= render 'companies/admin_actions', company: @company %>
 </div>

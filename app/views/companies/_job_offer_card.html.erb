@@ -1,0 +1,13 @@
+<div class="job-offer-card">
+  <h4><%= link_to job_offer.position, job_offer %></h4>
+  <p><strong>Location:</strong> <%= job_offer.location %></p>
+  <p><strong>Work Mode:</strong> <%= job_offer.work_mode.humanize %></p>
+  <p><strong>Experience:</strong> <%= job_offer.experience_level.humanize %></p>
+
+  <% if job_offer.salary_min || job_offer.salary_max %>
+    <p><strong>Salary:</strong>
+      <%= number_to_currency(job_offer.salary_min) if job_offer.salary_min %>
+      <%= " - #{number_to_currency(job_offer.salary_max)}" if job_offer.salary_max %>
+    </p>
+  <% end %>
+</div>

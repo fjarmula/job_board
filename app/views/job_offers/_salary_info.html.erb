@@ -1,0 +1,6 @@
+<% if job_offer.salary_min || job_offer.salary_max %>
+  <p><strong>Salary:</strong>
+    <%= number_to_currency(job_offer.salary_min) if job_offer.salary_min %>
+    <%= " - #{number_to_currency(job_offer.salary_max)}" if job_offer.salary_max %>
+  </p>
+<% end %>

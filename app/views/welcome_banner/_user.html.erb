@@ -1,0 +1,4 @@
+<h2>Welcome back, <%= Current.user.username %>!</h2>
+<p>Ready to find your next opportunity?</p>
+<%= link_to "Browse All Job Offers", job_offers_path %>
+<%= button_to "Logout", logout_path, method: :delete %>

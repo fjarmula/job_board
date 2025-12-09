@@ -1,0 +1,12 @@
+<div class="job-offers-container">
+  <% if job_offers.any? %>
+    <div id="job_offers">
+      <%= render job_offers %>
+    </div>
+  <% else %>
+    <div class="no-results">
+      <h3>No job offers found</h3>
+      <p>Try adjusting your search criteria or <%= link_to "clear filters", root_path %> to see all jobs.</p>
+    </div>
+  <% end %>
+</div>

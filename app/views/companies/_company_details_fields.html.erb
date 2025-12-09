@@ -1,0 +1,24 @@
+<div class="field">
+  <%= f.label :website, "Website" %>
+  <%= f.text_field :website, placeholder: "https://example.com" %>
+</div>
+
+<div class="field">
+  <%= f.label :industry, "Industry" %>
+  <%= f.text_field :industry, placeholder: "e.g., Technology, Healthcare, Finance" %>
+</div>
+
+<div class="field">
+  <%= f.label :size, "Company Size" %>
+  <%= f.select :size, options_for_select(Company::SIZES, f.object.size), include_blank: "Select company size..." %>
+</div>
+
+<div class="field">
+  <%= f.label :founded_in, "Founded In" %>
+  <%= f.number_field :founded_in, min: 1800, max: Date.current.year, placeholder: "e.g., 2010" %>
+</div>
+
+<div class="field">
+  <%= f.label :headquarters, "Headquarters" %>
+  <%= f.text_field :headquarters, placeholder: "e.g., San Francisco, CA" %>
+</div>

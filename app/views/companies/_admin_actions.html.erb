@@ -1,0 +1,5 @@
+<% if current_recruiter&.super_recruiter? && current_recruiter.company == company %>
+  <div class="admin-actions">
+    <%= link_to "Edit Company Profile", edit_company_path(company), class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,6 @@
+<% if company.description.present? %>
+  <div class="section">
+    <h3>About Us</h3>
+    <p><%= simple_format(company.description) %></p>
+  </div>
+<% end %>

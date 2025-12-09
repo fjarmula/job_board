@@ -1,0 +1,10 @@
+<div class="section">
+  <h3>Current Job Offers</h3>
+  <% if company.job_offers.any? %>
+    <div class="job-offers">
+      <%= render company.job_offers %>
+    </div>
+  <% else %>
+    <p>No current job openings.</p>
+  <% end %>
+</div>

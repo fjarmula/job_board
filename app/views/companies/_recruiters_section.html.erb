@@ -1,0 +1,13 @@
+<div class="section">
+  <h3>Recruiters</h3>
+  <div class="recruiters-list">
+    <% @company.recruiters.each do |recruiter| %>
+      <div class="recruiter-item">
+        <%= link_to "#{recruiter.first_name} #{recruiter.last_name}", recruiter_path(recruiter) %>
+        <% if recruiter.super_recruiter? %>
+          <span class="super-recruiter-badge">Super Recruiter</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

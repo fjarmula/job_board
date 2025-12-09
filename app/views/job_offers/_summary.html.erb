@@ -15,4 +15,13 @@
 
 <p><strong>Description:</strong> <%= truncate(job_offer.description, length: 150) %></p>
 <p class="read-more"><%= link_to "See full job offer", job_offer %></p>
+
 <p><small>Posted: <%= time_ago_in_words(job_offer.created_at) %> ago</small></p>
+
+<% if defined?(current_recruiter) && current_recruiter == job_offer.recruiter %>
+  <div class="recruiter-actions">
+    <!-- TODO: Enable editing and deleting job offers -->
+    <%#= link_to "Edit", edit_job_offer_path(job_offer) %>
+    <%#= link_to "Delete", job_offer, method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+<% end %>

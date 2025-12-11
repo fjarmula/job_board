@@ -27,7 +27,7 @@ export default class extends Controller {
         }
 
         try {
-            const response = await fetch(`/companies/check_exists?name=${encodeURIComponent(companyName)}`)
+            const response = await fetch(`/api/v1/companies/check_exists?name=${encodeURIComponent(companyName)}`)
             const data = await response.json()
 
             this.statusTarget.style.display = 'block'

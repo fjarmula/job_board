@@ -1,8 +1,46 @@
 # Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
+# --- Project-Specific Configuration ---
+
+# Global settings for all cops
+AllCops:
+  # Set the Ruby version your project uses. RuboCop uses this to enable/disable
+  # version-specific cops. For example:
+  # TargetRubyVersion: 3.2
+
+  # Set the Rails version for Rails-specific cops.
+  # TargetRailsVersion: 7.1
+
+  # Exclude files typically auto-generated or not meant for style checking
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'config/**/*' # You can be more selective here if you want
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'test/test_helper.rb'
+    - 'lib/tasks/*.rake'
+    - 'Guardfile'
+    - 'Rakefile'
+    - 'Gemfile'
+
+  # Enable new cops when upgrading RuboCop (recommended)
+  NewCops: enable
+
+# --- Overrides and Custom House Style ---
+
+# You can add overrides for any cop here.
+# For example, to change the maximum line length:
+# Layout/LineLength:
+#   Max: 120
+
+# To disable a specific rule you don't agree with in the omakase style:
+# Style/Documentation:
 #   Enabled: false
+
+# To re-enable a cop that is disabled by default in omakase:
+# Style/FrozenStringLiteralComment:
+#   Enabled: true

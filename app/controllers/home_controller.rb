@@ -1,13 +1,10 @@
 class HomeController < ApplicationController
   allow_unauthenticated_access
-  helper_method :search_params_present?, :active_filters
+  helper_method :search_params_present?
 
   def index
-    @job_offers = JobOffer.all
-    @job_offers = @job_offers.search_and_filter(params[:search]) if params[:search].present?
-    @job_offers = @job_offers.order(created_at: :desc)
+    @job_offers = JobsFinder.new(params).call
   end
-
 
   private
     def search_params_present?(search_params)

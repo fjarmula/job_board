@@ -13,42 +13,6 @@ class JobOffer < ApplicationRecord
   enum :employment_type, { employment_contract: 0, mandate_contract: 1, b2b: 2, other: 4 }
   enum :experience_level, { junior: 0, mid_level: 1, senior: 2 }
 
-
-  scope :by_company, ->(name) {
-    if name.present?
-      joins(recruiter: :company).where("companies.name ILIKE ?", "%#{name}%")
-    else
-      all
-    end
-  }
-
-  scope :by_position, ->(position) {
-    where("position ILIKE ?", "%#{position}%") if position.present?
-  }
-
-  scope :by_experience, ->(level) {
-    where(experience_level: level) if level.present?
-  }
-
-  scope :by_work_mode, ->(mode) {
-    where(work_mode: mode) if mode.present?
-  }
-
-  scope :by_location, ->(location) {
-    where("location ILIKE ?", "%#{location}%") if location.present?
-  }
-
-  def self.search_and_filter(search_params)
-    return all unless search_params.present?
-
-    all
-      .by_company(search_params[:company])
-      .by_position(search_params[:position])
-      .by_experience(search_params[:experience_level])
-      .by_work_mode(search_params[:work_mode])
-      .by_location(search_params[:location])
-  end
-
   private
     def salary_range_valid
       if (salary_min.present? && salary_max.present?) && (salary_min > salary_max)

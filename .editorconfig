@@ -1,0 +1,9 @@
+# .editorconfig
+
+# Top-level settings
+root = true
+
+[*]
+# Enforce a single newline at the end of the file for all file types
+insert_final_newline = true
+trim_trailing_whitespace = true

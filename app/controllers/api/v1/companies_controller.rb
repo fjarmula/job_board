@@ -1,4 +1,4 @@
-class Api::V1::CompaniesController < ApplicationController
+class Api::V1::CompaniesController < Api::V1::BaseController
   allow_unauthenticated_access only: [ :check_exists ]
   def check_exists
     company_name = params[:name]&.strip

@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  allow_unauthenticated_access only: [ :check_exists, :show, :edit, :update ]
+  allow_unauthenticated_access only: [ :show, :edit, :update ]
   before_action :set_company, only: [ :show, :edit, :update ]
   before_action :authorize_super_recruiter!, only: [ :edit, :update ]
 

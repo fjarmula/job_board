@@ -1,0 +1,16 @@
+<% if authenticated? && !Current.user.job_applications.exists?(job_offer: @job_offer) %>
+  <%= link_to 'Apply for this Job',
+              job_offer_job_applications_path(@job_offer),
+              data: { turbo_method: :post },
+              class: 'btn btn-primary' %>
+
+<% elsif authenticated? %>
+  <p class="alert alert-info">
+    You have already applied for this job.
+  </p>
+
+<% else %>
+  <p>
+    Please <%= link_to 'log in', new_session_path %> to apply for this job.
+  </p>
+<% end %>

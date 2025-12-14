@@ -112,6 +112,7 @@
     <orderEntry type="library" scope="PROVIDED" name="psych (v5.2.6, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v6.0.2, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v7.1.0, asdf: 3.4.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pundit (v2.5.2, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="racc (v1.8.1, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v3.2.4, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-session (v2.1.1, asdf: 3.4.5) [gem]" level="application" />

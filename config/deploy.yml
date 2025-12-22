@@ -92,7 +92,7 @@ builder:
 accessories:
   bulldog_crawler:
     image: fjarmula/job_board:latest
-    command: >
+    cmd: >
       sh -c "
       while true; do
         bin/rails runner 'BulldogCrawler.new(pages: 3).call';

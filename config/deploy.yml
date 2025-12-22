@@ -92,14 +92,17 @@ builder:
 accessories:
   bulldog_crawler:
     image: fjarmula/job_board:latest
-    roles:
-      - web
+    roles: [web]
+    env:
+      RAILS_ENV: production
+      SECRET_KEY_BASE: SECRET_KEY_BASE
     cmd: >
       sh -c "
       while true; do
         bin/rails runner 'BulldogCrawler.new(pages: 3).call';
         sleep 86400;
-      done"
+      done
+      "
 #   db:
 #     image: mysql:8.0
 #     host: 192.168.0.2

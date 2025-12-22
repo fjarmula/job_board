@@ -19,10 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, "log/cron.log"
-set :environment, "production"
-set :job_template, "/bin/bash -l -c ':job'"
-
 every 1.day, at: '12:00 am' do
   runner "BulldogCrawler.new(pages: 3).call"
 end

@@ -5,7 +5,7 @@ require "openssl"
 
 class BulldogCrawler
   BASE_URL  = "https://bulldogjob.pl"
-  START_URL = "https://bulldogjob.pl/companies/jobs/s/"
+  START_URL = "https://bulldogjob.pl/companies/jobs/s/order,published,desc/" #taking advantage of the sorting by published date to be able to scrape the latest jobs first
   SCRAPED_PASSWORD = "password123"
   HEADERS = {
     "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " \

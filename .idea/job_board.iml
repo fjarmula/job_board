@@ -54,8 +54,9 @@
     <orderEntry type="library" scope="PROVIDED" name="bundler-audit (v0.9.2, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.40.0, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="childprocess (v5.1.0, asdf: 3.4.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="chronic (v0.10.2, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.3.5, asdf: 3.4.5) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="connection_pool (v2.5.4, asdf: 3.4.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="connection_pool (v3.0.2, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="csv (v3.3.5, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="date (v3.5.0, asdf: 3.4.5) [gem]" level="application" />
@@ -166,6 +167,7 @@
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.11, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.8.0, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.5, asdf: 3.4.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="whenever (v1.1.1, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v3.2.0, asdf: 3.4.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="zeitwerk (v2.7.3, asdf: 3.4.5) [gem]" level="application" />
   </component>

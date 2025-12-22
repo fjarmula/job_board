@@ -89,7 +89,15 @@ builder:
 #   user: app
 
 # Use accessory services (secrets come from .kamal/secrets).
-# accessories:
+accessories:
+  bulldog_crawler:
+    image: fjarmula/job_board:latest
+    command: >
+      sh -c "
+      while true; do
+        bin/rails runner 'BulldogCrawler.new(pages: 3).call';
+        sleep 86400;
+      done"
 #   db:
 #     image: mysql:8.0
 #     host: 192.168.0.2

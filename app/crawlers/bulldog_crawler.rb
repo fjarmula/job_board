@@ -5,7 +5,7 @@ require "openssl"
 
 class BulldogCrawler
   BASE_URL  = "https://bulldogjob.pl"
-  START_URL = "https://bulldogjob.pl/companies/jobs/s/order,published,desc/" #taking advantage of the sorting by published date to be able to scrape the latest jobs first
+  START_URL = "https://bulldogjob.pl/companies/jobs/s/order,published,desc/" # taking advantage of the sorting by published date to be able to scrape the latest jobs first
   SCRAPED_PASSWORD = "password123"
   HEADERS = {
     "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " \
@@ -61,10 +61,10 @@ class BulldogCrawler
       employment_raw = anchor.css("div[class*='details'] div.hidden span")[0]&.text&.strip
 
       employment_type = case employment_raw
-        when "Umowa o pracę" then "employment_contract"
-        when "Umowa zlecenie" then "mandate_contract"
-        when "B2B" then "b2b"
-        else "other"
+      when "Umowa o pracę" then "employment_contract"
+      when "Umowa zlecenie" then "mandate_contract"
+      when "B2B" then "b2b"
+      else "other"
       end
 
       source_url = URI.join(BASE_URL, anchor["href"]).to_s

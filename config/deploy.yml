@@ -94,11 +94,9 @@ accessories:
     image: fjarmula/job_board:latest
     roles: [web]
     env:
-      clear:
-        RAILS_ENV: production
-      secret:
-        - SECRET_KEY_BASE
-        - DB_HOST
+      RAILS_ENV: production
+      SECRET_KEY_BASE: SECRET_KEY_BASE
+      DB_HOST: 207.154.207.126
     cmd: >
       sh -c "
       while true; do

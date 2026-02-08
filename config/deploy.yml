@@ -11,7 +11,7 @@ servers:
   jobs:
     hosts:
       - 207.154.207.126
-    command: bundle exec rake solid_queue:start
+    cmd: bundle exec rake solid_queue:start
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # If used with Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.

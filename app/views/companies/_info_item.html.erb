@@ -1,5 +1,6 @@
 <% if value.present? %>
   <div class="info-item">
-    <strong><%= label %>:</strong> <%= value %>
+    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.25rem;"><%= local_assigns[:label] %></div>
+    <span style="font-weight: 600; color: var(--text-main);"><%= value %></span>
   </div>
 <% end %>

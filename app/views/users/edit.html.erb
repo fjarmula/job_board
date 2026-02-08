@@ -1,6 +1,6 @@
 <div class="auth-page">
   <div class="auth-form-card">
-    <h2>Job Seeker Sign Up</h2>
+    <h2>Edit Profile</h2>
 
     <%= form_with model: @user do |f| %>
       <% if @user.errors.any? %>
@@ -25,22 +25,22 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :password %>
+        <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+          <%= f.label :password, "New Password", style: "margin-bottom: 0;" %>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">(leave blank if you don't want to change it)</span>
+        </div>
         <%= f.password_field :password, placeholder: "••••••••" %>
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation %>
+        <%= f.label :password_confirmation, "Confirm New Password" %>
         <%= f.password_field :password_confirmation, placeholder: "••••••••" %>
       </div>
 
       <div class="form-actions">
-        <%= f.submit "Create Account", class: "btn btn-primary" %>
+        <%= f.submit "Update Account", class: "btn btn-primary" %>
+        <%= link_to "Cancel", root_path, class: "btn btn-secondary" %>
       </div>
     <% end %>
-
-    <div class="auth-footer">
-      Already have an account? <%= link_to "Sign in", login_path %>
-    </div>
   </div>
 </div>

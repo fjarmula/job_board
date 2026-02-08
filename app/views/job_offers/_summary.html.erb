@@ -1,27 +1,38 @@
-<h3><%= link_to job_offer.position, job_offer %></h3>
-
-<div class="job-summary-details">
-  <p>
-    <strong>Company:</strong>
-    <%= link_to job_offer.recruiter.company.name, company_path(job_offer.recruiter.company) %>
-  </p>
-
-  <p><strong>Location:</strong> <%= job_offer.location %></p>
-  <p><strong>Work Mode:</strong> <%= job_offer.work_mode.humanize %></p>
-  <p><strong>Experience:</strong> <%= job_offer.experience_level.humanize %></p>
+<div class="job-card-header">
+  <div>
+    <h3 class="job-card-title"><%= link_to job_offer.position, job_offer %></h3>
+    <p style="margin: 0.25rem 0 0; font-weight: 600;">
+      <%= link_to job_offer.recruiter.company.name, company_path(job_offer.recruiter.company), style: "color: var(--text-main);" %>
+    </p>
+  </div>
+  <div class="badge badge-blue"><%= job_offer.work_mode.humanize %></div>
 </div>
 
-<%= render 'job_offers/salary_info', job_offer: job_offer %>
+<div class="job-card-meta">
+  <span>📍 <%= job_offer.location %></span>
+  <span>💼 <%= job_offer.experience_level.humanize %></span>
+  <span>📅 Posted <%= time_ago_in_words(job_offer.created_at) %> ago</span>
+</div>
 
-<p><strong>Description:</strong> <%= truncate(job_offer.description, length: 150) %></p>
-<p class="read-more"><%= link_to "See full job offer", job_offer %></p>
+<div style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.875rem;">
+  <%= truncate(job_offer.description, length: 140) %>
+</div>
 
-<p><small>Posted: <%= time_ago_in_words(job_offer.created_at) %> ago</small></p>
-
-<% if defined?(current_recruiter) && current_recruiter == job_offer.recruiter %>
-  <div class="recruiter-actions">
-    <!-- TODO: Enable editing and deleting job offers -->
-    <%#= link_to "Edit", edit_job_offer_path(job_offer) %>
-    <%#= link_to "Delete", job_offer, method: :delete, data: { confirm: "Are you sure?" } %>
+<div class="job-card-footer">
+  <div class="salary">
+    <% if job_offer.salary_min || job_offer.salary_max %>
+      <%= number_to_currency(job_offer.salary_min, precision: 0) if job_offer.salary_min %>
+      <%= " - " if job_offer.salary_min && job_offer.salary_max %>
+      <%= number_to_currency(job_offer.salary_max, precision: 0) if job_offer.salary_max %>
+    <% else %>
+      <span style="color: var(--text-muted); font-weight: normal;">Salary undisclosed</span>
+    <% end %>
   </div>
-<% end %>
+
+  <div class="actions">
+    <% if defined?(current_recruiter) && current_recruiter == job_offer.recruiter %>
+       <%#= link_to "Edit", edit_job_offer_path(job_offer), class: "btn btn-secondary" %>
+    <% end %>
+    <%= link_to "Details", job_offer, class: "btn btn-secondary" %>
+  </div>
+</div>

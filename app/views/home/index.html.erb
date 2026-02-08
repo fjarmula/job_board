@@ -1,11 +1,18 @@
-<h1>Welcome to Job Board</h1>
+<section class="hero">
+  <h1>Find Your Next Dream Job</h1>
+  <p>Discover thousands of job opportunities from top companies around the world.</p>
 
-<%= render 'home/search_form' %>
+  <% if !authenticated? && !recruiter_signed_in? %>
+    <%= render "authentication_options" %>
+  <% else %>
+    <%= render "welcome_banner" %>
+  <% end %>
+</section>
 
-<hr>
+<div class="search-container">
+  <%= render 'home/search_form' %>
+</div>
 
-<%= render 'home/welcome_section' %>
-
-<hr>
-
-<%= render 'home/job_offers_list', job_offers: @job_offers %>
+<div class="job-offers-section">
+  <%= render 'home/job_offers_list', job_offers: @job_offers %>
+</div>

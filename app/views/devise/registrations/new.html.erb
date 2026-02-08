@@ -1,13 +1,33 @@
-<h2>Recruiter Sign Up</h2>
+<div class="auth-page">
+  <div class="auth-form-card" style="max-width: 600px;">
+    <h2>Recruiter Sign Up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= render "recruiter_fields", f: f, resource: resource %>
-  <%= render "company_lookup", f: f %>
-  <%= render "authentication_fields", f: f, minimum_password_length: @minimum_password_length %>
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Personal Info</h3>
+          <%= render "recruiter_fields", f: f, resource: resource %>
+        </div>
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Account Info</h3>
+          <%= render "authentication_fields", f: f, minimum_password_length: @minimum_password_length %>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid var(--bg-color);">
+        <h3 style="font-size: 1rem; margin-bottom: 1rem;">Company Details</h3>
+        <%= render "company_lookup", f: f %>
+      </div>
+
+      <div class="form-actions" style="margin-top: 3rem;">
+        <%= f.submit "Create Recruiter Account", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="auth-footer">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

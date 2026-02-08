@@ -1,13 +1,13 @@
-<h2>
+<h2 style="margin-top: 0;">
   Welcome back, <%= current_recruiter.first_name %>!
   <% if current_recruiter.super_recruiter? %>
-    <span class="super-recruiter-badge">Super Recruiter</span>
+    <span class="badge badge-blue">Super Recruiter</span>
   <% end %>
 </h2>
 <p>Company: <strong><%= current_recruiter.company.name %></strong></p>
-<div class="recruiter-actions">
-  <%= link_to "Browse Job Offers", job_offers_path %>
-  <%= link_to "Create New Job Offer", new_job_offer_path, class: "btn btn-success" %>
-  <%= link_to "My Company Profile", company_path(current_recruiter.company), class: "btn btn-secondary" %>
-  <%= button_to "Logout", destroy_recruiter_session_path, method: :delete %>
+<div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+  <%= link_to "Browse Jobs", job_offers_path, class: "btn btn-secondary" %>
+  <%= link_to "Post Job", new_job_offer_path, class: "btn btn-primary" %>
+  <%= link_to "Company Profile", company_path(current_recruiter.company), class: "btn btn-secondary" %>
+  <%= link_to "Edit Profile", edit_recruiter_registration_path, class: "btn btn-secondary" %>
 </div>

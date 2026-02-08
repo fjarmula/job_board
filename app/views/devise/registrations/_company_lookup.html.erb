@@ -1,12 +1,13 @@
 <div data-controller="company-lookup">
-  <div class="field">
-    <%= f.label :company, "Company Name" %><br />
+  <div class="form-group">
+    <%= f.label :company, "Company Name" %>
     <%= f.text_field :company, autocomplete: "company",
+                     placeholder: "Search or enter company name...",
                      data: { "company-lookup-target": "companyInput",
                              action: "input->company-lookup#check" } %>
 
-    <small data-company-lookup-target="status"
-           style="display: none; margin-top: 5px;"></small>
+    <div data-company-lookup-target="status"
+         style="display: none; margin-top: 0.5rem; font-size: 0.875rem; padding: 0.5rem; border-radius: var(--radius);"></div>
   </div>
 
   <%# New Company Details Partial (initially hidden by Stimulus) %>

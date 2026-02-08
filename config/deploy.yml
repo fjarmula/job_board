@@ -12,6 +12,11 @@ servers:
     hosts:
       - 207.154.207.126
     cmd: bundle exec rake solid_queue:start
+  healthcheck:
+    hosts:
+      path: /up
+      interval: 10s
+      timeout: 5s
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # If used with Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.

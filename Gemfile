@@ -6,6 +6,8 @@ gem "rails", "~> 8.1.1"
 gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+
+gem "solid_queue"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -67,7 +69,6 @@ group :development, :test do
   # Preview emails in the browser
   gem "letter_opener"
 
-  gem "solid_queue"
 end
 
 group :development do

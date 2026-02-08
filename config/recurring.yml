@@ -1,0 +1,5 @@
+production:
+  bulldog_sync:
+    class: BulldogSyncJob
+    args: [5] # Number of pages to scrape
+    schedule: "1 2 * * *" # Runs every day at 2:00 AM

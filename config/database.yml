@@ -81,4 +81,5 @@ test:
 production:
   <<: *default
   database: job_board_production
+  host: <%= ENV["DB_HOST"] %>
   url: <%= Rails.application.credentials.db_url %>

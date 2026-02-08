@@ -1,6 +1,10 @@
 <% if job_offer.salary_min || job_offer.salary_max %>
-  <p><strong>Salary:</strong>
-    <%= number_to_currency(job_offer.salary_min) if job_offer.salary_min %>
-    <%= " - #{number_to_currency(job_offer.salary_max)}" if job_offer.salary_max %>
-  </p>
+  <div class="info-item">
+    <label>Salary Range</label>
+    <span style="font-size: 1.25rem; color: var(--primary-color);">
+      <%= number_to_currency(job_offer.salary_min, precision: 0) if job_offer.salary_min %>
+      <%= " - " if job_offer.salary_min && job_offer.salary_max %>
+      <%= number_to_currency(job_offer.salary_max, precision: 0) if job_offer.salary_max %>
+    </span>
+  </div>
 <% end %>

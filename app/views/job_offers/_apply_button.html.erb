@@ -2,15 +2,16 @@
   <%= link_to 'Apply for this Job',
               job_offer_job_applications_path(@job_offer),
               data: { turbo_method: :post },
-              class: 'btn btn-primary' %>
+              class: 'btn btn-primary',
+              style: 'width: 100%; justify-content: center;' %>
 
 <% elsif authenticated? %>
-  <p class="alert alert-info">
-    You have already applied for this job.
-  </p>
+  <div class="badge badge-blue" style="width: 100%; padding: 0.75rem; justify-content: center; border-radius: var(--radius);">
+    You have applied for this job
+  </div>
 
 <% else %>
-  <p>
-    Please <%= link_to 'log in', new_session_path %> to apply for this job.
+  <p style="font-size: 0.875rem; color: var(--text-muted); text-align: center;">
+    Please <%= link_to 'log in', login_path, class: "link-hover", style: "font-weight: 600;" %> to apply for this job.
   </p>
 <% end %>

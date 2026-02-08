@@ -1,34 +1,36 @@
-<div data-company-lookup-target="newCompanyFields" style="display: none;">
-  <h3>Company Information</h3>
-  <p><em>Please provide additional details about your company</em></p>
+<div data-company-lookup-target="newCompanyFields" style="display: none; background: var(--bg-color); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border-color); margin-top: 1rem;">
+  <h4 style="margin-top: 0; margin-bottom: 0.5rem; color: var(--text-main);">New Company Information</h4>
+  <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">Please provide additional details about your company</p>
 
-  <div class="field">
-    <%= label_tag :company_description, "Company Description" %><br />
-    <%= text_area_tag :company_description, nil, rows: 4, placeholder: "Brief description of your company..." %>
-  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+    <div class="form-group" style="grid-column: span 2;">
+      <%= label_tag :company_description, "Company Description" %>
+      <%= text_area_tag :company_description, nil, rows: 3, placeholder: "Brief description of your company..." %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :company_website, "Website" %><br />
-    <%= text_field_tag :company_website, nil, placeholder: "https://example.com" %>
-  </div>
+    <div class="form-group">
+      <%= label_tag :company_website, "Website" %>
+      <%= text_field_tag :company_website, nil, placeholder: "https://example.com" %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :company_industry, "Industry" %><br />
-    <%= text_field_tag :company_industry, nil, placeholder: "e.g., Technology, Healthcare, Finance" %>
-  </div>
+    <div class="form-group">
+      <%= label_tag :company_industry, "Industry" %>
+      <%= text_field_tag :company_industry, nil, placeholder: "e.g., Technology" %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :company_size, "Company Size" %><br />
-    <%= select_tag :company_size, options_for_select(Company::SIZES), include_blank: "Select company size..." %>
-  </div>
+    <div class="form-group">
+      <%= label_tag :company_size, "Company Size" %>
+      <%= select_tag :company_size, options_for_select(Company::SIZES), include_blank: "Select size..." %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :company_founded_in, "Founded In" %><br />
-    <%= number_field_tag :company_founded_in, nil, min: 1800, max: Date.current.year, placeholder: "e.g., 2010" %>
-  </div>
+    <div class="form-group">
+      <%= label_tag :company_founded_in, "Founded In" %>
+      <%= number_field_tag :company_founded_in, nil, min: 1800, max: Date.current.year, placeholder: "e.g., 2010" %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :company_headquarters, "Headquarters" %><br />
-    <%= text_field_tag :company_headquarters, nil, placeholder: "e.g., San Francisco, CA" %>
+    <div class="form-group" style="grid-column: span 2;">
+      <%= label_tag :company_headquarters, "Headquarters" %>
+      <%= text_field_tag :company_headquarters, nil, placeholder: "e.g., San Francisco, CA" %>
+    </div>
   </div>
 </div>

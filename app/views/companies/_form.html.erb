@@ -1,20 +1,22 @@
 <%= form_with(model: company, local: true) do |f| %>
   <%= render 'shared/error_messages', resource: company %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name, "Company Name" %>
-    <%= f.text_field :name, required: true %>
+    <%= f.text_field :name, required: true, placeholder: "e.g., Tech Corp" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description, "Company Description" %>
     <%= f.text_area :description, rows: 6, placeholder: "Tell candidates about your company culture, mission, and values..." %>
   </div>
 
-  <%= render 'companies/company_details_fields', f: f %>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+    <%= render 'companies/company_details_fields', f: f %>
+  </div>
 
-  <div class="actions">
-    <%= f.submit "Update Company Profile" %>
-    <%= link_to "Cancel", company_path(company) %>
+  <div class="form-actions" style="display: flex; gap: 1rem;">
+    <%= f.submit "Update Company Profile", class: "btn btn-primary" %>
+    <%= link_to "Cancel", company_path(company), class: "btn btn-secondary" %>
   </div>
 <% end %>

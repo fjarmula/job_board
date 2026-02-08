@@ -1,17 +1,19 @@
-<div class="field">
-  <%= f.label :email %><br />
-  <%= f.email_field :email, autocomplete: "email" %>
+<div class="form-group">
+  <%= f.label :email %>
+  <%= f.email_field :email, autocomplete: "email", placeholder: "e.g., jane@company.com" %>
 </div>
 
-<div class="field">
-  <%= f.label :password %>
-  <% if minimum_password_length %>
-    <em>(<%= minimum_password_length %> characters minimum)</em>
-  <% end %><br />
-  <%= f.password_field :password, autocomplete: "new-password" %>
+<div class="form-group">
+  <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+    <%= f.label :password, style: "margin-bottom: 0;" %>
+    <% if minimum_password_length %>
+      <span style="font-size: 0.75rem; color: var(--text-muted);">(<%= minimum_password_length %> chars min)</span>
+    <% end %>
+  </div>
+  <%= f.password_field :password, autocomplete: "new-password", placeholder: "••••••••" %>
 </div>
 
-<div class="field">
-  <%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<div class="form-group">
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "••••••••" %>
 </div>

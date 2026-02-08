@@ -1,16 +1,10 @@
-<div class="recruiter-info">
-  <% if recruiter.super_recruiter? %>
-    <div class="super-recruiter-badge">Super Recruiter</div>
-  <% end %>
-
-  <div class="info-grid">
-    <div class="info-item">
-      <strong>Company:</strong>
-      <%= link_to recruiter.company.name, company_path(recruiter.company) %>
-    </div>
-
-    <div class="info-item">
-      <strong>Email:</strong> <%= recruiter.email %>
-    </div>
+<div class="info-grid">
+  <div class="info-item">
+    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.25rem;">Email</div>
+    <span style="font-weight: 600; color: var(--text-main);"><%= recruiter.email %></span>
+  </div>
+  <div class="info-item">
+    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.25rem;">Joined</div>
+    <span style="font-weight: 600; color: var(--text-main);"><%= recruiter.created_at.strftime("%B %Y") %></span>
   </div>
 </div>

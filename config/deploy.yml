@@ -24,8 +24,8 @@ proxy:
   app_port: 3000
   healthcheck:
     path: /up
-    interval: 10s
-    timeout: 5s
+    interval: 10
+    timeout: 5
 
 # Where you keep your container images.
 registry:

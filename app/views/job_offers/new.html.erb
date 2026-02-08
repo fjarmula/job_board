@@ -1,3 +1,7 @@
-<h1><%= @job_offer.persisted? ? "Edit Job Offer" : "Create New Job Offer" %></h1>
+<div class="page-header">
+  <h1 class="page-title"><%= @job_offer.persisted? ? "Edit Job Offer" : "Create New Job Offer" %></h1>
+</div>
 
-<%= render 'job_offers/form', job_offer: @job_offer %>
+<div class="content-card">
+  <%= render 'job_offers/form', job_offer: @job_offer %>
+</div>

@@ -1,11 +1,11 @@
 <%= f.hidden_field :recruiter_type, value: 'recruiter' %>
 
-<div class="field">
-  <%= f.label :first_name %><br />
-  <%= f.text_field :first_name, autofocus: true, autocomplete: "first-name" %>
+<div class="form-group">
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name, autofocus: true, autocomplete: "first-name", placeholder: "e.g., Jane" %>
 </div>
 
-<div class="field">
-  <%= f.label :last_name %><br />
-  <%= f.text_field :last_name, autocomplete: "last-name" %>
+<div class="form-group">
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name, autocomplete: "last-name", placeholder: "e.g., Doe" %>
 </div>

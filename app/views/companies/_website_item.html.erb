@@ -1,5 +1,6 @@
 <% if website.present? %>
   <div class="info-item">
-    <strong>Website:</strong> <%= external_link_to website, website %>
+    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.25rem;">Website</div>
+    <span style="font-weight: 600; color: var(--text-main);"><%= external_link_to website, website %></span>
   </div>
 <% end %>

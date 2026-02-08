@@ -1,4 +1,4 @@
-<div>
+<div class="search-field">
   <%= label_tag "search[#{name}]", label %>
   <%= select_tag "search[#{name}]",
                  options_for_select(options, params.dig(:search, name.to_sym)) %>

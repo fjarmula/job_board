@@ -2,6 +2,18 @@
   <div class="auth-form-card">
     <h2>Recruiter Log in</h2>
 
+    <% if flash[:alert] %>
+      <div class="error-explanation" style="margin-bottom: 1rem;">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
+    <% if flash[:notice] %>
+      <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 1rem; border-radius: var(--radius); margin-bottom: 1.5rem; color: #065f46; font-size: 0.875rem;">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
     <%= form_for(resource, as: resource_name, url: recruiter_session_path ) do |f| %>
       <div class="form-group">
         <%= f.label :email %>

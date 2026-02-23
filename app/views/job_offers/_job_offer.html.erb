@@ -1,4 +1,4 @@
-<div class="job-offer">
+<div class="job-card" id="<%= dom_id job_offer %>">
   <% if defined?(show_full_details) && show_full_details %>
     <%= render 'job_offers/full_details', job_offer: job_offer %>
   <% else %>

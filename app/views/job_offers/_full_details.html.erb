@@ -1,34 +1,44 @@
-<h2><%= job_offer.position %></h2>
-
-<div class="job-full-details">
-  <p>
-    <strong>Company:</strong>
-    <%= link_to job_offer.recruiter.company.name, company_path(job_offer.recruiter.company) %>
-  </p>
-
-  <p>
-    <strong>Posted by:</strong>
-    <%= link_to "#{job_offer.recruiter.first_name} #{job_offer.recruiter.last_name}",
-                recruiter_path(job_offer.recruiter) %>
-  </p>
-
-  <p><strong>Location:</strong> <%= job_offer.location %></p>
-  <p><strong>Work Mode:</strong> <%= job_offer.work_mode.humanize %></p>
-  <p><strong>Work Dimension:</strong> <%= job_offer.work_dimension.humanize %></p>
-  <p><strong>Experience:</strong> <%= job_offer.experience_level.humanize %></p>
-  <p><strong>Employment Type:</strong> <%= job_offer.employment_type.humanize %></p>
+<div class="info-grid">
+  <div class="info-item">
+    <label>Location</label>
+    <span>📍 <%= job_offer.location %></span>
+  </div>
+  <div class="info-item">
+    <label>Experience</label>
+    <span>💼 <%= job_offer.experience_level.humanize %></span>
+  </div>
+  <div class="info-item">
+    <label>Work Dimension</label>
+    <span>⏱️ <%= job_offer.work_dimension.humanize %></span>
+  </div>
+  <div class="info-item">
+    <label>Employment Type</label>
+    <span>📄 <%= job_offer.employment_type.humanize %></span>
+  </div>
 </div>
 
-<%= render 'job_offers/salary_info', job_offer: job_offer %>
-
-<div class="job-description-section">
-  <h3>Job Description</h3>
-  <p><%= job_offer.description %></p>
+<div style="margin: 2rem 0;">
+  <%= render 'job_offers/salary_info', job_offer: job_offer %>
 </div>
 
-<div class="job-tech-stack">
-  <h3>Tech Stack</h3>
-  <p><%= job_offer.tech_stack %></p>
+<div class="job-description-section" style="margin-top: 2.5rem;">
+  <h3 class="section-title">Job Description</h3>
+  <div style="line-height: 1.6; color: var(--text-main);">
+    <%= simple_format job_offer.description %>
+  </div>
 </div>
 
-<p><small>Posted: <%= time_ago_in_words(job_offer.created_at) %> ago</small></p>
+<% if job_offer.tech_stack.present? %>
+  <div class="job-tech-stack" style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+    <h3 class="section-title">Tech Stack</h3>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      <% job_offer.tech_stack.split(',').each do |tech| %>
+        <span class="badge badge-blue"><%= tech.strip %></span>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div style="margin-top: 3rem; color: var(--text-muted); font-size: 0.875rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+  Posted <%= time_ago_in_words(job_offer.created_at) %> ago
+</div>

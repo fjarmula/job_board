@@ -1,21 +1,41 @@
-<div class="company-profile">
-  <h1><%= @company.name %></h1>
+<div class="page-header">
+  <h1 class="page-title"><%= @company.name %></h1>
+</div>
 
-  <div class="company-details">
-    <%= render 'companies/description', company: @company %>
+<div class="view-layout">
+  <div class="main-content">
+    <div class="content-card">
+      <h3 class="section-title">About <%= @company.name %></h3>
+      <%= render 'companies/description', company: @company %>
 
-    <div class="company-info-grid">
-      <%= render 'companies/info_item', label: 'Industry', value: @company.industry %>
-      <%= render 'companies/info_item', label: 'Company Size', value: @company.size %>
-      <%= render 'companies/info_item', label: 'Founded', value: @company.founded_in %>
-      <%= render 'companies/info_item', label: 'Headquarters', value: @company.headquarters %>
-      <%= render 'companies/website_item', website: @company.website %>
+      <div class="info-grid">
+        <%= render 'companies/info_item', label: 'Industry', value: @company.industry %>
+        <%= render 'companies/info_item', label: 'Company Size', value: @company.size %>
+        <%= render 'companies/info_item', label: 'Founded', value: @company.founded_in %>
+        <%= render 'companies/info_item', label: 'Headquarters', value: @company.headquarters %>
+      </div>
+    </div>
+
+    <div id="jobs-section" style="margin-top: 3rem;">
+      <h3 class="section-title">Open Positions</h3>
+      <%= render 'companies/job_offers_section', company: @company %>
     </div>
   </div>
 
-  <%= render 'companies/job_offers_section', company: @company %>
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3 style="margin-top: 0; margin-bottom: 1.5rem;">Company Info</h3>
+      <%= render 'companies/website_item', website: @company.website %>
 
-  <%= render 'companies/recruiters_section', company: @company %>
+      <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--border-color);">
 
-  <%= render 'companies/admin_actions', company: @company %>
+      <h4 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Our Team</h4>
+      <%= render 'companies/recruiters_section', company: @company %>
+
+      <% if recruiter_signed_in? && current_recruiter.company == @company %>
+        <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--border-color);">
+        <%= render 'companies/admin_actions', company: @company %>
+      <% end %>
+    </div>
+  </aside>
 </div>

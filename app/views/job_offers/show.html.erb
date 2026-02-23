@@ -1,2 +1,40 @@
-<%= render 'job_offers/job_offer', job_offer: @job_offer, show_full_details: true %>
-<%= render 'job_offers/apply_button', job_offer: @job_offer %>
+<div class="page-header">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap;">
+    <div>
+      <h1 class="page-title"><%= @job_offer.position %></h1>
+      <p style="font-size: 1.25rem; color: var(--text-muted); margin-top: 0.5rem;">
+        <%= link_to @job_offer.recruiter.company.name, company_path(@job_offer.recruiter.company), class: "link-hover" %>
+      </p>
+    </div>
+    <div class="badge badge-blue" style="font-size: 1rem; padding: 0.5rem 1rem;">
+      <%= @job_offer.work_mode.humanize %>
+    </div>
+  </div>
+</div>
+
+<div class="view-layout">
+  <div class="main-content">
+    <div class="content-card">
+      <%= render 'job_offers/full_details', job_offer: @job_offer %>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3 style="margin-top: 0; margin-bottom: 1.5rem;">Apply Now</h3>
+      <%= render 'job_offers/apply_button', job_offer: @job_offer %>
+
+      <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+      <div class="recruiter-mini-profile">
+        <p style="margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.875rem;">Posted by</p>
+        <p style="font-weight: 600; margin: 0;">
+          <%= link_to "#{@job_offer.recruiter.first_name} #{@job_offer.recruiter.last_name}", recruiter_path(@job_offer.recruiter) %>
+        </p>
+        <% if @job_offer.recruiter.super_recruiter? %>
+          <span class="badge badge-purple" style="font-size: 0.75rem;">Super Recruiter</span>
+        <% end %>
+      </div>
+    </div>
+  </aside>
+</div>

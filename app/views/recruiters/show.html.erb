@@ -1,11 +1,38 @@
-<div class="recruiter-profile">
-  <h1><%= @recruiter.first_name %> <%= @recruiter.last_name %></h1>
+<div class="page-header">
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <h1 class="page-title"><%= @recruiter.first_name %> <%= @recruiter.last_name %></h1>
+    <% if @recruiter.super_recruiter? %>
+      <span class="badge badge-purple" style="font-size: 1rem;">Super Recruiter</span>
+    <% end %>
+  </div>
+</div>
 
-  <%= render 'recruiters/basic_info', recruiter: @recruiter %>
+<div class="view-layout">
+  <div class="main-content">
+    <div class="content-card">
+      <h3 class="section-title">About the Recruiter</h3>
+      <%= render 'recruiters/basic_info', recruiter: @recruiter %>
+    </div>
 
-  <%= render 'recruiters/job_offers_list', recruiter: @recruiter %>
+    <div style="margin-top: 3rem;">
+      <h3 class="section-title">Job Offers by <%= @recruiter.first_name %></h3>
+      <%= render 'recruiters/job_offers_list', recruiter: @recruiter %>
+    </div>
+  </div>
 
-  <% if current_recruiter == @recruiter %>
-    <%= render 'recruiters/personal_actions' %>
-  <% end %>
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3 style="margin-top: 0; margin-bottom: 1.5rem;">Company</h3>
+      <p style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">
+        <%= link_to @recruiter.company.name, company_path(@recruiter.company), class: "link-hover" %>
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.875rem;"><%= @recruiter.company.industry %></p>
+
+      <% if current_recruiter == @recruiter %>
+        <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid var(--border-color);">
+        <h4 style="font-size: 0.875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Actions</h4>
+        <%= render 'recruiters/personal_actions' %>
+      <% end %>
+    </div>
+  </aside>
 </div>

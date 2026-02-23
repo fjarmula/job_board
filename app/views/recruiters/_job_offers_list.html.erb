@@ -1,10 +1,9 @@
-<div class="section">
-  <h3>Job Offers Posted</h3>
+<div>
   <% if recruiter.job_offers.any? %>
-    <div class="job-offers">
+    <div class="job-offers-grid">
       <%= render recruiter.job_offers, current_recruiter: current_recruiter %>
     </div>
   <% else %>
-    <p>No job offers posted yet.</p>
+    <p style="color: var(--text-muted); font-style: italic;">No job offers posted yet.</p>
   <% end %>
 </div>

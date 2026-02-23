@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   }
   get "home/index"
   resource :session, only: [ :new, :create, :destroy ]
-  resources :users, only: [ :new, :create ]
+  resources :users, only: [ :new, :create, :edit, :update ]
 
   get "login", to: "sessions#new"
   delete "logout", to: "sessions#destroy"

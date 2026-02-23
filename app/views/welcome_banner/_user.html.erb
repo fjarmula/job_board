@@ -1,4 +1,6 @@
-<h2>Welcome back, <%= Current.user.username %>!</h2>
+<h2 style="margin-top: 0;">Welcome back, <%= Current.user.username %>!</h2>
 <p>Ready to find your next opportunity?</p>
-<%= link_to "Browse All Job Offers", job_offers_path %>
-<%= button_to "Logout", logout_path, method: :delete %>
+<div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+  <%= link_to "Browse Jobs", job_offers_path, class: "btn btn-secondary" %>
+  <%= link_to "Edit Profile", edit_user_path(Current.user), class: "btn btn-primary" %>
+</div>

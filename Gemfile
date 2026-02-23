@@ -6,6 +6,10 @@ gem "rails", "~> 8.1.1"
 gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+
+gem "solid_queue"
+gem "solid_cache"
+gem "solid_cable"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -20,6 +24,12 @@ gem "jbuilder"
 # gem "redis", ">= 4.0.1"
 gem "pundit"
 gem "devise"
+
+gem "httparty"
+gem "nokogiri"
+
+gem 'whenever', require: false
+
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
@@ -60,6 +70,7 @@ group :development, :test do
 
   # Preview emails in the browser
   gem "letter_opener"
+
 end
 
 group :development do

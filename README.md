@@ -4,9 +4,7 @@ A Ruby on Rails application for publishing job offers and letting candidates app
 
 ## Live demo
 
-The app is currently deployed at: http://207.154.207.126/
-
-Note: the connection is **not secure** right now (HTTP only; no TLS/HTTPS yet).
+The app isn't currently deployed
 
 ## Tech stack
 
